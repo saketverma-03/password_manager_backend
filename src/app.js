@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
-app.use("/api", userRoutes); //->Authantication Routes
-app.use("/api", passwordRoutes); //->Authantication Routes
+app.use("/api/user", userRoutes); //->Authantication Routes
+app.use("/api/password", passwordRoutes); //->Authantication Routes
 
 let dbUrl = "mongodb://mongo:6xSoqVg3nYQrYsdfI9zb@containers-us-west-189.railway.app:7489"
 db.connect(process.env.DB_URL || dbUrl, {
