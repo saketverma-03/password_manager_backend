@@ -17,8 +17,7 @@ app.use(cors());
 app.use("/api/user", userRoutes); //->Authantication Routes
 app.use("/api/password", passwordRoutes); //->Authantication Routes
 
-let dbUrl =
-  "mongodb+srv://main:BKuNve9s57auc9fc@passmandb.ddgkuba.mongodb.net/?retryWrites=true&w=majority";
+let dbUrl = "";
 db.connect(process.env.DB_URL)
   .then(() => {
     console.log("[Mongoose] Connected to DataBase");
