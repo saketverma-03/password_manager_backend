@@ -1,7 +1,4 @@
-// const { response } = require("express");
-// const password = require("../models/password");
 const Password = require("../models/password")
-
 
 exports.savePasword = (req, res) => {
     const passwordItem = new Password({
@@ -23,8 +20,8 @@ exports.savePasword = (req, res) => {
 }
 
 exports.getAllPassword = (req, res) => {
-    // const Item = new Password()
-    Password.find({ userId: req.userId }, (err, items) => {
+
+    Password.find({ userId: req.params['id'] }, (err, items) => {
         if (err) {
             // Handle the error
             return res.status(500).json({
@@ -32,7 +29,7 @@ exports.getAllPassword = (req, res) => {
                 message: "Can not fetch password pleas try loging in again"
             });
         }
-        return res.status(400).json({items,message:"Synced to Database"})
+        return res.status(200).json({items,message:"Synced to Database"})
     })
 }
 
@@ -61,11 +58,11 @@ exports.updateOne = (req,res) => {
         if(!item){
             return res.status(400).json({message:"item not found",error})
         }
-        item.productUsername = req.body.productUsername;
-        item.productWebsite = req.body.productWebsite;
+        item.username = req.body.username;
+        item.product = req.body.product;
+        
         item.password = req.body.password;
-        item.save((error) => {
-            
+        item.save((error) => {      
             res.status(200).json({message:"Succesfully Updated"})
         })
     });

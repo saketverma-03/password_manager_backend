@@ -5,8 +5,8 @@ const { savePasword,getAllPassword,deleteOne,updateOne } = require("../controlle
 
 const route = express.Router()
 
-route.post("/addPasswordToDb", isSignedIn, savePasword)
-route.get("/getAllPassword", isSignedIn, getAllPassword)
+route.post("/addPassword", isSignedIn, savePasword)
+route.get("/getAllPassword/:id", isSignedIn, getAllPassword)
 route.delete("/deletOnePassword",isSignedIn,deleteOne)
 route.put("/updateOnePassword",isSignedIn,updateOne)
 

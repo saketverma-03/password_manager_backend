@@ -1,7 +1,6 @@
 const User = require("../models/users")
 const { validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken");
-// const ejwt = require("express-jwt"); 
 
 // Create New User
 exports.signup = (req, res) => {
@@ -18,12 +17,19 @@ exports.signup = (req, res) => {
      */
     user.save((e, createdUser) => {
         if (e) {
+            if(e.code === 11000){
+                return res.status(400).json({
+                    message: "User with email is Allready SignedUp",
+                    error: e
+                })  
+            }
             return res.status(400).json({
-                errorMessage: "Unable to carry request User not created",
+                message: "Unable to carry request User not created",
                 error: e
             })
         }
-        res.json(createdUser);
+        const {email}=createdUser;
+        res.json({email});
     })
 }
 
@@ -43,14 +49,14 @@ exports.signin = (req, res) => {
     // findin user By Matching Given parameter
     User.findOne({ email }, (error, user) => {
         if (error) {
-            return res.status(400).json({ errorMessage: "Email is Not registerd", error })
+            return res.status(400).json({ message: "Email is Not registerd", error })
         }
         if (!user) {
-            return res.status(400).json({ errorMessage: "user with the email or Username does not exist" })
+            return res.status(400).json({ message: "user with the email or Username does not exist",error:true })
         }
         // authanticate funtion is declred in user schema methods
         if (!user.authanticate(password)) {
-            return res.status(401).json({ error: "Email and Password do not match" })
+            return res.status(401).json({ message: "Email and Password do not match",error:true })
         }
 
         // Create Token
@@ -67,11 +73,12 @@ exports.signin = (req, res) => {
 
 exports.isSignedIn = (req, res, next) => {
     // extracting token from request header
-    const token = req.headers.authorization;
-
+    // const token = req.headers.authorization;
+    const cookie = req.cookies;
+    const authorizationHeader = req.get('Authorization');
     
     try {
-        const decoded = jwt.verify(token, "saket");
+        const decoded = jwt.verify(authorizationHeader, "saket");
         req.userId = decoded._id;
     }
     catch (err) {

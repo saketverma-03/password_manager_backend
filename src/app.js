@@ -10,7 +10,6 @@ const app = express();
 const userRoutes = require("./routes/user");
 const passwordRoutes = require("./routes/password");
 
-
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
@@ -18,14 +17,14 @@ app.use(cors());
 app.use("/api/user", userRoutes); //->Authantication Routes
 app.use("/api/password", passwordRoutes); //->Authantication Routes
 
-let dbUrl = "mongodb://mongo:6xSoqVg3nYQrYsdfI9zb@containers-us-west-189.railway.app:7489"
-db.connect(process.env.DB_URL || dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-//   useCreateIndex: true
-}).then(() => {
-  console.log("[Mongoose] Connected to DataBase");
-}).catch(error => console.log(error));
+let dbUrl =
+  "mongodb+srv://main:BKuNve9s57auc9fc@passmandb.ddgkuba.mongodb.net/?retryWrites=true&w=majority";
+db.connect(process.env.DB_URL)
+  .then(() => {
+    console.log("[Mongoose] Connected to DataBase");
+  })
+  .catch((error) => console.log(error));
 
-app.
-listen(process.env.PORT || 8080,() => console.log("[app][Express] Server Started"));
+app.listen(process.env.PORT, () =>
+  console.log(`[app][Express]: Server Started at port [${process.env.PORT}]`)
+);

@@ -16,7 +16,7 @@ route.post("/signup",
   ,signup); 
 
 //  signin route
-route.get("/signin",
+route.post("/signin",
     [
       body('email').isEmail().withMessage("Must Be A email"),
       // body('password').isLength({ min: 5 }).withMessage("Password Should contain more than 5 character")

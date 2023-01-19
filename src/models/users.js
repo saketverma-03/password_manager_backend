@@ -9,7 +9,6 @@ const crypto = require("crypto");
 const userSchema = new schema({
   name: {
     type: String,
-    required: true,
     maxlength: 30,
     trim: true,
   },
@@ -38,10 +37,7 @@ userSchema
         this.salt = uuidv1();
         this.hashed_password = this.securePassword(password);
     });
-//   .get(function () {
-//     return _password;
-//   });
-
+  
 /* USER SCHEMA METHODS
 * user schema methods can be accessed 
 * directly from schema and its objects

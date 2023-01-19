@@ -1,7 +1,7 @@
 {
   "name": "password_manager_backend",
   "version": "0.1.0",
-  "description": "Backend For Passwordmanger",
+  "description": "Backend For A passowrd Manager",
   "main": "app.js",
   "author": "Saket verma",
   "license": "MIT",

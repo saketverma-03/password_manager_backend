@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// const schema = mongoose.Schema;
 
 const PasswordStoreSchema = new mongoose.Schema({
     userId: {
@@ -11,19 +10,6 @@ const PasswordStoreSchema = new mongoose.Schema({
     product: String,
     password: String
 })
-
-// more methods for excrypted database not needed write know
-// PasswordStoreSchema
-// .virtual("password")
-// .get(function(){
-
-// })
-
-// PasswordStoreSchema.methods = {
-//     setBase: () => {
-//         this.passwordBase = 
-//     }
-// }
 
 module.exports = mongoose.model("Password", PasswordStoreSchema);
 
